@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+  }
+
+body {
+    background-color: #000;
+}
+
+  h1 {
+    font-family: 'Notable', sans-serif;
+    font-size: 128px;
+    text-align: center;
+    letter-spacing: 2px;
+    background: -webkit-linear-gradient(#a8a632, #3244a8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(2px 2px #fcf803);
+    
+  }
+
+  h2 {
+    font-family: 'Ranga', cursive;
+    font-size: 112px;
+    margin-top: -10%;
+    color: #ff3dae;
+    text-shadow: 3px 3px 10px #ff3dae;
+  }
+
+  h4 {
+      color: white;
+      text-align: center;
+  }
+
+  .rotate {
+    transform: rotate(-30deg);
+    /* Legacy vendor prefixes that you probably don't need... */
+    /* Safari */
+    -webkit-transform: rotate(-30deg);
+    /* Firefox */
+    -moz-transform: rotate(-30deg);
+    /* IE */
+    -ms-transform: rotate(-30deg);
+    /* Opera */
+    -o-transform: rotate(-30deg);
+    /* Internet Explorer */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  }
+
+.game-window {
+    border: 2px dashed white;
+    margin-top: 10%;
+}
