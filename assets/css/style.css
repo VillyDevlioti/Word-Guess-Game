@@ -31,6 +31,11 @@ body {
       text-align: center;
   }
 
+  #music-band >img {
+    width: 300px;
+    height: 300px;
+  }
+
   .rotate {
     transform: rotate(-30deg);
     /* Legacy vendor prefixes that you probably don't need... */
