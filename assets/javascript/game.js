@@ -12,6 +12,7 @@ var quizQuestions = [
 
 var wins = 0;
 var losses = 0;
+var tries = 10;
 
     //CONTINUE READING HERE
     //So when does a game end successfully?
@@ -19,23 +20,28 @@ var losses = 0;
     //Therefore, the logic here is: As long as there are tries available, the user can keep guessing!
     function hangmanTheGame (targetWord, userGuess) {
         document.getElementById('game-message').textContent = "Guess a letter"; //Friendly message on the screen
-        var tries = 2*targetWord.length; // How many tries does the user have? let's say twice the word length, fair?
-        document.onkeyup(function(event){
-            userInput = event.key;
-            while (tries>0) { // while you still have tries, play!
-                var x = hangmanGuess.indexOf(userInput); // let's assign a variable,  I know it's not code economy, but it's too long
-                if (x!=-1){ //if the input is indeed a letter in the word
-                    userGuess[x]=userInput; // replace the respective dash with letter
-                    console.log(userGuess[x]);
-                    for (var i = 0; i < userGuess.length; i++){ //print the updated dashes table baby!
-                        console.log(i);
-                    }
-                    tries--; //one less try tho :(
-                } else {
-                    tries--; //nooooooooooo
-                }   
+        while (tries>0){
+            if (targetWord === userGuess) {
+                return true;
+                //get to the next word
+                //return and move to the next word
+            } else {
+                document.onkeyup(function(e){
+                    var userInput = e.key;
+                    if (targetWord.indexOf(userInput)>-1){
+                        var x=targetWord.indexOf(userInput);
+                        console.log(userInput);
+                        userGuess[x]=userInput;
+                        document.getElementById('dashes').textContent = userGuess; //Friendly message on the screen
+                    } 
+                    document.getElementById('letters-guessed').append(userInput+", ");
+                });
             }
-        });
+            tries--;
+            document.getElementById('guesses-remaining').append(tries);
+        }
+        //You lost
+        return false;
     }
 
     //START READING HERE
@@ -46,9 +52,7 @@ var losses = 0;
             if (gameStarted!=true){
                 gameStarted = true;
                 console.log(gameStarted);
-                var userInput = event.key;
-                console.log(userInput);
-                document.getElementById('wins').textContent=wins //When you first start the game, then wins and losses equal to 0, Because reasons!
+                document.getElementById('wins').textContent=wins; //When you first start the game, then wins and losses equal to 0, Because reasons!
                 document.getElementById('losses').textContent=losses; 
                 //I create a table here that will have the size length
                 //as the length of each element in the questions object. 
@@ -65,9 +69,16 @@ var losses = 0;
                     node.appendChild(writeDashes);  // writing this to the html file! I almost cried this worked!
                 }
             } else if (gameStarted){ //Game started, great! Let's play!
-            hangmanTheGame(hangmanGuess, userGuess);
+            if (hangmanTheGame(hangmanGuess, userGuess)){
+                wins++;
+                document.getElementById('game-message').textContent = "You won!"; //Friendly message on the screen
+                return;
+            } else {
+                losses++;
+                document.getElementById('game-message').textContent = "You lost!"; //Friendly message on the screen
+                return;
             }
-        
+            }
         }
     }
      
